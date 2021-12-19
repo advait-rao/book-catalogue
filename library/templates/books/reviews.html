@@ -1,0 +1,91 @@
+<!--This is sort of like book.html, except it's for  review_book.html-->
+{% extends "layout.html" %}
+{% block title %}Review{% endblock %}
+
+{% block content %}
+<br/>
+<h1 align="center">Review</h1>
+<br />
+
+
+
+{% if books %}
+<nav style="clear:both; ">
+  <div style="float:left">
+    <!--First page button -->
+    {% if first_book_page_url is not none %}
+    <button type="button" class="btn btn-secondary btn-sm" onclick="window.location.href='{{first_book_page_url}}'">First</button>
+    {% else %}
+    <button type="button" class="btn btn-secondary btn-sm" disabled>First</button>
+    {% endif %}
+    <!-- previous page button -->
+    {% if prev_page_url is not none %}
+    <button type="button" class="btn btn-secondary btn-sm" onclick="window.location.href='{{prev_page_url}}'">Previous page</button>
+    {% else %}
+    <button type="button" class="btn btn-secondary btn-sm" disabled>Previous page</button>
+    {% endif %}
+  </div>
+  <div style="float:right">
+    <!-- next page button -->
+    {% if next_page_url is not none %}
+    <button type="button" class="btn btn-secondary btn-sm" onclick="window.location.href='{{next_page_url}}'">Next page</button>
+    {% else %}
+    <button type="button" class="btn btn-secondary btn-sm" disabled>Next page</button>
+    {% endif %}
+    <!-- last page button -->
+    {% if last_page_url is not none %}
+    <button type="button" class="btn btn-secondary btn-sm" onclick="window.location.href='{{last_page_url}}'">Last</button>
+    {% else %}
+    <button type="button" class="btn btn-secondary btn-sm" disabled>Last</button>
+    {% endif %}
+  </div>
+</nav>
+{% endif %}
+
+
+<div>
+  <br/>
+  <br/>
+    {% include "books/review_book.html" %}
+
+</div>
+
+{% if books %}
+<nav style="clear:both; ">
+  <div style="float:left">
+    <!--First page button -->
+    {% if first_book_page_url is not none %}
+    <button onclick="window.location.href='{{first_book_page_url}}'" type="button" class="btn btn-secondary btn-sm">First</button>
+    {% else %}
+    <button type="button" class="btn btn-secondary btn-sm" disabled>First</button>
+    {% endif %}
+    <!-- previous page button -->
+    {% if prev_page_url is not none %}
+    <button onclick="window.location.href='{{prev_page_url}}'" type="button" class="btn btn-secondary btn-sm">Previous page</button>
+    {% else %}
+    <button type="button" class="btn btn-secondary btn-sm" disabled>Previous page</button>
+    {% endif %}
+  </div>
+
+  <div style="float:right">
+    <!-- next page button -->
+    {% if next_page_url is not none %}
+    <button type="button" class="btn btn-secondary btn-sm" onclick="window.location.href='{{next_page_url}}'">Next page</button>
+    {% else %}
+    <button type="button" class="btn btn-secondary btn-sm" disabled>Next page</button>
+    {% endif %}
+
+    <!-- last page button -->
+    {% if last_page_url is not none %}
+    <button type="button" class="btn btn-secondary btn-sm" onclick="window.location.href='{{last_page_url}}'">Last</button>
+    {% else %}
+    <button type="button" class="btn btn-secondary btn-sm" disabled>Last</button>
+    {% endif %}
+  </div>
+</nav>
+<br>
+<br />
+
+{% endif %}
+
+{% endblock %}

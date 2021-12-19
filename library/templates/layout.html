@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{% block title %}Book Catalogue{% endblock %}</title>
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+            crossorigin="anonymous"
+        />
+    </head>
+
+    <body class="d-flex flex-column min-vh-100">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbar"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+                <div class="navbar-nav">
+                    <a
+                        class="nav-item nav-link"
+                        href="{{ url_for('home_bp.home') }}"
+                        >Home</a
+                    >
+                    <a
+                        class="nav-item nav-link"
+                        href="{{ url_for('books_bp.display_all_books') }}"
+                        >All Books</a
+                    >
+                    {% if "user_name" in session %}
+                    <a
+                        class="nav-item nav-link"
+                        href="{{ url_for('books_bp.browse_by_favourites') }}"
+                        >Favourites</a
+                    >
+                    {% endif %}
+                    <a
+                        class="nav-item nav-link"
+                        href="{{ url_for('books_bp.browse_by_author') }}"
+                        >Authors</a
+                    >
+                    <a
+                        class="nav-item nav-link"
+                        href="{{ url_for('books_bp.browse_by_publisher') }}"
+                        >Publishers</a
+                    >
+                    <a
+                        class="nav-item nav-link"
+                        href="{{ url_for('books_bp.browse_by_release_year') }}"
+                        >Release Years</a
+                    >
+                    {% if "user_name" in session %}
+                    <a
+                        class="nav-item nav-link"
+                        href="{{ url_for('authentication_bp.logout') }}"
+                        >Logout</a
+                    >
+                    {% else %}
+                    <a
+                        class="nav-item nav-link"
+                        href="{{ url_for('authentication_bp.login') }}"
+                        >Login</a
+                    >
+                    <a
+                        class="nav-item nav-link"
+                        href="{{ url_for('authentication_bp.register') }}"
+                        >Sign Up</a
+                    >
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">{% block content %} {% endblock %}</div>
+
+        <script
+            src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+        ></script>
+
+        <footer class="mt-auto text-center text-lg-start bg-light text-muted">
+            <div
+                class="text-center p-4"
+                style="background-color: rgba(0, 0, 0, 0.05)"
+            >
+                ©2021 Advait:
+            </div>
+        </footer>
+    </body>
+</html>

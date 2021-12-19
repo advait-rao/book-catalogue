@@ -1,0 +1,21 @@
+{% block for_you %}
+
+<div align="center" style="background-color: white;">
+    <h5 align="center">For you</h5>
+</div>
+{% for book in books %}
+<div align="center">
+  <p><a target="_blank" href="{{book.hyperlink}}">
+    <img class="img-thumbnail" src="{{book.image_hyperlink}}" alt="book thumbnail">
+  </a></p>
+  <div>
+    <h6><a style="color: black" target="_blank" href="{{book.hyperlink}}">{{book.title}}<a/> </h6>
+    <h6>Authors: {{ ", ".join(book.authors) }}</h6>
+
+  </div>
+</div>
+
+<br/>
+
+{% endfor %}
+{% endblock %}

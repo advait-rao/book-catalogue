@@ -1,0 +1,46 @@
+<!-- this template part is to display book data on an html page-->
+{% block displaybook %}
+{% if books|length == 0%}
+<h5 align="left">You haven't added any favourite books yet</h3>
+{% endif %}
+{% for book in books %}
+<div>
+  <p><a target="_blank" href="{{book.hyperlink}}">
+    <img class="img-thumbnail" src="{{book.image_hyperlink}}" alt="book thumbnail">
+  </a></p>
+</div>
+<div>
+  <h3><a style="color: black" target="_blank" href="{{book.hyperlink}}">{{book.title}}<a/> </h3>
+  <h6>Authors: {{ ", ".join(book.authors) }}</h6>
+{% if book.release_year %}
+<h6>Release: {{ book.release_year }}</h6>
+{% endif %}
+<blockquote>
+  <p class="text-justify">{{ book.description }}</p>
+    <p>Rating: {{ book.average_rating }}</p>
+</blockquote>
+<div style="float:left">
+  <button class="btn btn-secondary btn-sm" onclick="location.href='{{ book.view_review_url }}'">{{ book.reviews|length }} Reviews</button>
+  <button class="btn btn-secondary btn-sm" onclick="location.href='{{ book.add_review_url }}'">Write a Review</button>
+  <!--Add to Favourites Button-->
+  <button class="btn btn-secondary btn-sm" onclick="location.href='{{ book.add_to_favourites_url }}'">Add to Favourites</button>
+</div>
+  {% if book.id == show_reviews_for_book %}
+<div style="clear:both">
+  <br>
+  <div style="background-color: rgb(255, 255, 255);">
+<br>
+<h6>Reviews ({{ book.reviews|length }}) :</h6>
+  {% for review in book.reviews %}
+      <p>{{review.review_text}}, by {{review.user_name}}, {{review.timestamp}}</p>
+  {% endfor %}
+  </div>
+</div>
+{% endif %}
+</div>
+
+<br/>
+<hr>
+{% endfor %}
+
+{% endblock %}

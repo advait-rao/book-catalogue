@@ -1,0 +1,49 @@
+<!-- this template part is to display book data when reviewing a book on an html page-->
+{% block displaybook %}
+
+<div>
+  <p><a target="_blank" href="{{book.hyperlink}}">
+    <img class="img-thumbnail" src="{{book.image_hyperlink}}" alt="book thumbnail">
+  </a></p>
+</div>
+<div>
+  <h3><a style="color: black" target="_blank" href="{{book.hyperlink}}">{{book.title}}<a/> </h3>
+  <h6>Authors: {{ ", ".join(book.authors) }}</h6>
+
+{% if book.release_year %}
+<h6>Release: {{ book.release_year }}</h6>
+{% endif %}
+<blockquote>
+  <p class="text-justify">{{ book.description }}</p>
+    <p>Rating: {{ book.average_rating }}</p>
+</blockquote>
+</div>
+
+<div class="form-wrapper">
+    <form action="{{handler_url}}" method="post">
+        {{form.book_id}} <!-- Need to include this hidden field as it tracks the book being reviewed. -->
+        {{form.csrf_token}} <!-- Need to include this token - Flask WTForms requires it. -->
+        <div class ="form-field"> </br>{{form.review(size = 100, placeholder="type your review", class="textarea", cols="50", rows="3", wrap="hard")}}
+            {% if form.review.errors %}
+                <ul class="errors">
+                {% for error in form.review.errors %}
+                    <li>{{error}}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        {{ form.submit }}
+    </form>
+</div>
+
+<div style="clear:both">
+    <div style="background-color: rgb(255, 255, 255);">
+  <br>
+  <h6>Reviews ({{ book.reviews|length }}) :</h6>
+    {% for review in book.reviews %}
+        <p>{{review.review_text}}, by {{review.user_name}}, {{review.timestamp}}</p>
+    {% endfor %}
+    </div>
+  </div>
+
+{% endblock %}
